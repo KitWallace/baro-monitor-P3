@@ -65,7 +65,7 @@ class Menu(object) :
               
         else :
             """ invalid action """
-            print action + " not recognised "
+            print (action + " not recognised ")
             self.current = None
 
     def run(self, visit) :
@@ -75,9 +75,11 @@ class Menu(object) :
 
         """
         visit(self.current)
-        for key in presenter.read_key() :
+        keypress = presenter.keypress()
+        for key in keypress :
             self.move(key)
             if self.current is None :
+                keypress.close()
                 exit()
             else :
                 visit(self.current)

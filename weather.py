@@ -1,7 +1,6 @@
 #!/usr/bin/python
-import urllib
+from urllib import request
 import time
-
 
 class Weather :
     """ cut down version just for the barometer mock """
@@ -12,12 +11,11 @@ class Weather :
         self.refresh()
 
     def refresh(self) :
-        try:
-            page = urllib.urlopen(self.url)
-            report = page.readline()
+            page = request.urlopen(self.url)
+            report = page.read().decode('utf-8')         
             data = report.split(" ")
             self.baro = float(data[6])
             self.ts = time.time()
             self.updated = True
-        except Exception :
-            self.updated = False
+            print(self.baro,self.ts)
+  

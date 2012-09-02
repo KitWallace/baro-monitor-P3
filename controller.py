@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3 
 """ yacht control  
 
 """
@@ -6,6 +6,7 @@
 import sys
 import speak
 import time
+import termios
 
 from menu import *
 from persistant import *
@@ -21,17 +22,17 @@ def visit(item) :
    else : 
       text = eval(action)
    speak.say(text)
-   print text
+   print (text)
 
 
 Switch('barotalk').put() 
 Switch('anchortalk').put() 
 Switch('clock').put()
 
-print "starting"
+print ("starting")
 
 name = sys.argv[1]
 menu = Menu(name)
-print menu
-menu.run(visit)  
+print (menu)
+menu.run(visit) 
 

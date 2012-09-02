@@ -2,7 +2,7 @@ import pickle
 import time
 
 def get(name) :   
-        file = open("obj/"+name+".pkl","r")
+        file = open("obj/"+name+".pkl","rb")
         return pickle.load(file)
 
 class Persistant(object) :
@@ -13,8 +13,8 @@ class Persistant(object) :
 
    
     def put(self) :
-        file = open("obj/"+self.name+".pkl","w")
+        file = open("obj/"+self.name+".pkl","wb")
         self.ts = time.time()
-        pickle.dump(self,file,0)
+        pickle.dump(self,file)
         return self
 

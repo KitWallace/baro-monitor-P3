@@ -3,7 +3,6 @@
 import time
 import sys
 from persistant import *
-from history import *
 from weather import *
 from moving_sequence import *
 
@@ -25,7 +24,7 @@ def baroSmoother(interval_secs,smooth_secs) :
     while True:
        total_baro = 0
        for i in range(max) :
-          reading = baro.next()
+          reading = next(baro)
           total_baro += reading
        average_baro = round(total_baro / max, 2)
        yield(average_baro)
@@ -50,7 +49,7 @@ class Barometer(Persistant) :
             self.history.add(self.baro)
             self.updateTrend()
             self.put()
-            print time.strftime("%a %H:%M",time.localtime(self.ts)),self.baro,self.trend,self.tendency,self.forecast
+            print (time.strftime("%a %H:%M",time.localtime(self.ts)),self.baro,self.trend,self.tendency,self.forecast)
  
     def updateTrend(self) :
         if self.history.get(-1) is not None :

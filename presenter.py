@@ -1,15 +1,17 @@
 #!/usr/bin/python
 import sys
 import tty
+import termios
 
-def read_key() :
+def keypress() :
     """ decode single keypresses from either the presenter or the keyboard
 
     """
     last = 0
     tty.setcbreak(sys.stdin)
 
-    while True :
+    try :
+      while True :
         code = ord(sys.stdin.read(1)) 
         if (code== 53 and last==91 or code==68) : 
             key = "left"
@@ -24,5 +26,12 @@ def read_key() :
         last=code
         if not(key is None) :
             yield key
+
+    finally :
+        #turn echo back on 
+        fd = sys.stdin.fileno()
+        old = termios.tcgetattr(fd)
+        old[3] = old[3] | termios.ECHO
+        termios.tcsetattr(fd, termios.TCSADRAIN, old)
 
 

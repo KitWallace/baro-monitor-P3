@@ -22,8 +22,9 @@
         <item title="Clock" action="'Clock is '+ get('clock').status()">
               <item action="'Clock is now '+ get('clock').toggle().put().status()"/>
         </item>
-
-        <item title="Ships Bell"/>
+       <item title="Ships Bell" action="'Ships Bell is '+ get('bells').status()">
+              <item action="'Ships Bell is now '+ get('bells').toggle().put().status()"/>
+        </item>
     </item>
     <item title="Tide">
         <!-- get data from tide prediction program for nearest location --> 
